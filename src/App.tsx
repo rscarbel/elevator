@@ -15,6 +15,9 @@ function App() {
 
   //need to change state to rerender keys so that the last highlighted key is cleared
   const [ refreshComponent, setRefreshComponent ] = useState(true)
+  const refresh = () => {
+    setRefreshComponent(!refreshComponent)
+  }
 
   //add floors to queue and initiate elevator movement
   const addFloorToQueue = (floor: number) => {
@@ -47,7 +50,8 @@ function App() {
     keys.unshift(<Key key={i}
       floor={i}
       floorQueue={floorQueue}
-      addFloorToQueue={ addFloorToQueue } />)
+      addFloorToQueue={ addFloorToQueue }
+      refresh={ refresh } />)
   }
 
   //Add functionality for visualizing the elevator move
@@ -72,7 +76,7 @@ function App() {
           moveElevator();
         } else {
           isMoving = false;
-          setRefreshComponent(!refreshComponent);
+          refresh();
         }
       }, WAIT_TIME)
     } else {
@@ -84,22 +88,6 @@ function App() {
       } else if (currentLocation < targetLocation) {
         setElevatorYAxisPos(elevatorYAxisPos += 5);
         moveElevator();
-      } else {
-        //if we've reached the floor we're looking for, remove it from the queue
-        floorQueue.shift();
-        //pause again, and check for more floors in the queue to see if we need to move in the other direction
-        setTimeout(() => {
-          if (floorQueue.length) {
-            moveElevator();
-          } else {
-            isMoving = false;
-            for (let i = NUMBER_OF_FLOORS - 1; i >= 0; i--) {
-              const key: JSX.Element = keys[i];
-              keys[i] = key;
-              console.log(key)
-            }
-          }
-        }, WAIT_TIME)
       }
     }
   },25)
