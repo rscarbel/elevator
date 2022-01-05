@@ -1,10 +1,22 @@
 import React from 'react';
 import './App.css';
 
+
+function App() {
+  return (
+    <div className="App">
+      <div className='building'>
+      </div>
+      <div className='keypad'>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+
 /*
 TODO
-
-make readme
 
 create building with 10 floors
     display floor number on each floor
@@ -21,12 +33,3 @@ make elevator move
 display current floor
     it should update as the floor moves
 */
-
-function App() {
-  return (
-    <div className="App">
-    </div>
-  );
-}
-
-export default App;
