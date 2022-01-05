@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import Floor from './components/Floor';
 import Elevator from './components/Elevator';
@@ -14,9 +14,9 @@ const WAIT_TIME: number = 3000;
 function App() {
 
   //need to change state to rerender keys so that the last highlighted key is cleared
-  const [ refreshComponent, setRefreshComponent ] = useState(true)
+  let [ refreshComponent, setRefreshComponent ] = useState({})
   const refresh = () => {
-    setRefreshComponent(!refreshComponent)
+    setRefreshComponent({})
   }
 
   //add floors to queue and initiate elevator movement
@@ -75,14 +75,13 @@ function App() {
         if (floorQueue.length) {
           moveElevator();
         } else {
-          if (exactFloorPosition !== -1) {
-            floorQueue.push(1);
-            moveElevator();
+          isMoving = false;
+          if (exactFloorPosition !== 1) {
+            addFloorToQueue(1);
           } else {
-            isMoving = false;
-            refresh();
+            refresh()
           }
-        }
+        };
       }, WAIT_TIME)
     } else {
       //decrement the location if the target is below the current location
@@ -96,7 +95,6 @@ function App() {
       }
     }
   },25)
-
 
   return (
     <div className="App">
