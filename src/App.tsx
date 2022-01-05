@@ -44,7 +44,7 @@ function App() {
   //Add functionality for visualizing the elevator move
   const moveElevator = () => setTimeout(() => {
     const targetLocation: number =  convertFloorToYPos(floorQueue[0]);
-    const currentLocation: number = detectFloor()
+    const currentLocation: number = elevatorYAxisPos;
 
     if (currentLocation > targetLocation) {
       setElevatorYAxisPos(elevatorYAxisPos -= 5);
