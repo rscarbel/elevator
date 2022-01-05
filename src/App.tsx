@@ -6,13 +6,19 @@ import Key from './components/Key';
 
 //create queue for pressed floors that persists though renders
 const floorQueue: number[] = [];
+let isMoving: boolean = false;
 
 function App() {
 
   //add floors to queue and initiate elevator movement
   const addFloorToQueue = (floor: number) => {
-    floorQueue.push(floor)
-    moveElevator()
+    if (floorQueue.indexOf(floor) === -1) {
+      floorQueue.push(floor)
+    }
+    if (!isMoving) {
+      isMoving = true;
+      moveElevator()
+    }
   }
 
   //keep track of the position on the y-axis
@@ -40,18 +46,44 @@ function App() {
 
   //Add functionality for visualizing the elevator move
   const moveElevator = () => setTimeout(() => {
+
     const targetLocation: number =  convertFloorToYPos(floorQueue[0]);
+
     const currentLocation: number = elevatorYAxisPos;
 
-    if (currentLocation > targetLocation) {
-      setElevatorYAxisPos(elevatorYAxisPos -= 5);
-      moveElevator();
-    } else if (currentLocation < targetLocation) {
-      setElevatorYAxisPos(elevatorYAxisPos += 5);
-      moveElevator();
+    const exactFloorPosition = currentLocation / 50 + 1;
+
+    const currentFloorQueueIndex  = floorQueue.indexOf(exactFloorPosition)
+
+    //if the current y-axis location is the same as one of the floors in the queue, pause on that floor
+    if (currentFloorQueueIndex !== -1) {
+      setTimeout(() => {
+        floorQueue.splice(currentFloorQueueIndex,1)
+        if (floorQueue.length) {
+          moveElevator();
+        } else {
+          isMoving = false;
+        }
+      }, 1500)
     } else {
-      floorQueue.shift();
+      if (currentLocation > targetLocation) {
+        setElevatorYAxisPos(elevatorYAxisPos -= 5);
+        moveElevator();
+      } else if (currentLocation < targetLocation) {
+        setElevatorYAxisPos(elevatorYAxisPos += 5);
+        moveElevator();
+      } else {
+        floorQueue.shift();
+        setTimeout(() => {
+          if (floorQueue.length) {
+            moveElevator();
+          } else {
+            isMoving = false;
+          }
+        }, 1500)
+      }
     }
+
 
   },25)
 
