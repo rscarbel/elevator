@@ -6,15 +6,22 @@ import Key from './components/Key';
 
 function App() {
 
+  let [ currentFloor, setCurrentFloor ] = useState(1);
+
+  const changeFloor = (floor: number) => {
+    setCurrentFloor(floor);
+  };
+
   const floors: JSX.Element[] = [];
   const keys: JSX.Element[] = [];
 
   for (let i = 10; i >= 1; i--) {
     floors.push(<Floor key={i} floor={i} />)
-    keys.unshift(<Key key={i} floor={i} />)
+    keys.unshift(<Key key={i}
+      floor={i}
+      changeFloor={ changeFloor } />)
   }
 
-  let [ currentFloor, setCurrentFloor ] = useState(1);
 
   return (
     <div className="App">
