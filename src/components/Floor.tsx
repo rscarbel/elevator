@@ -1,7 +1,7 @@
 import React from "react"
 
 const Floor: React.FC = () => {
-  return <div>
+  return <div className='floor'>
 
   </div>;
 };

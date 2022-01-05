@@ -1,7 +1,7 @@
 import React from "react";
 
 const Elevator: React.FC = () => {
-  return <div>
+  return <div className='elevator'>
 
   </div>;
 };
