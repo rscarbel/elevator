@@ -24,6 +24,7 @@
   height: 50px;
   border: 1px solid #000000;
   background-color: #eeeeee;
+  padding-left: 10px;
 }
 
 .elevator {
@@ -33,7 +34,11 @@
   background-color: #268d37;
   position: absolute;
   bottom: 0;
-  left: 30%;
+  left: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .key {
