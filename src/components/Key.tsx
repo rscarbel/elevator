@@ -1,8 +1,12 @@
 import React from "react"
 
-const Key: React.FC = () => {
-  return <div className='key'>
+interface KeyProps {
+  floor: number;
+}
 
+const Key: React.FC<KeyProps> = ({ floor }) => {
+  return <div className='key'>
+    <p>{ floor }</p>
   </div>;
 };
 
