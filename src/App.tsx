@@ -1,8 +1,19 @@
 import React from 'react';
 import './App.css';
-
+import Floor from './components/Floor';
+import Elevator from './components/Elevator';
+import Key from './components/Key';
 
 function App() {
+
+  const floors: JSX.Element[] = [];
+  const keys: JSX.Element[] = [];
+
+  for (let i = 10; i >= 1; i++) {
+    floors.push(<Floor />)
+    keys.unshift(<Key />)
+  }
+
   return (
     <div className="App">
       <div className='building'>
