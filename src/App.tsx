@@ -10,8 +10,8 @@ function App() {
   const keys: JSX.Element[] = [];
 
   for (let i = 10; i >= 1; i++) {
-    floors.push(<Floor />)
-    keys.unshift(<Key />)
+    floors.push(<Floor key={i} />)
+    keys.unshift(<Key key={i} />)
   }
 
   return (
