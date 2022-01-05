@@ -14,7 +14,7 @@ const WAIT_TIME: number = 3000;
 function App() {
 
   //need to change state to rerender keys so that the last highlighted key is cleared
-  let [ refreshComponent, setRefreshComponent ] = useState({})
+  let [ , setRefreshComponent ] = useState({})
   const refresh = () => {
     setRefreshComponent({})
   }
