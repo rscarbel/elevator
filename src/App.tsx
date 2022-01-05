@@ -17,9 +17,6 @@ function App() {
 
   //keep track of the position on the y-axis
   let [ elevatorYAxisPos, setElevatorYAxisPos ] = useState(0);
-  const changeElevatorYAxisPos = (location: number) => {
-    setElevatorYAxisPos(location);
-  };
 
   //identify what floor the y-axis position corresponds to
   const detectFloor = (yPos: number = elevatorYAxisPos) => Math.floor(yPos / 50 + 1);
@@ -37,7 +34,6 @@ function App() {
     floors.push(<Floor key={i} floor={i} />)
     keys.unshift(<Key key={i}
       floor={i}
-      yAxisPos={ convertFloorToYPos(i) }
       floorQueue={floorQueue}
       addFloorToQueue={ addFloorToQueue } />)
   }
