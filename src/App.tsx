@@ -9,7 +9,7 @@ function App() {
   const floors: JSX.Element[] = [];
   const keys: JSX.Element[] = [];
 
-  for (let i = 10; i >= 1; i++) {
+  for (let i = 10; i >= 1; i--) {
     floors.push(<Floor key={i} />)
     keys.unshift(<Key key={i} />)
   }
@@ -17,8 +17,11 @@ function App() {
   return (
     <div className="App">
       <div className='building'>
+        {floors}
+        <Elevator />
       </div>
       <div className='keypad'>
+        {keys}
       </div>
     </div>
   );
