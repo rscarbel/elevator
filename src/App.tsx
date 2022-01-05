@@ -22,7 +22,7 @@ function App() {
   };
 
   //identify what floor the y-axis position corresponds to
-  const detectFloor = (yPos: number = elevatorYAxisPos) => yPos / 50 + 1;
+  const detectFloor = (yPos: number = elevatorYAxisPos) => Math.floor(yPos / 50 + 1);
 
   //Since each floor is 50px, we need to multiply the floor by 50 and then subtract 50 to account for the height of the elevator.
   //grab first element in queue and find it's location on the page.
