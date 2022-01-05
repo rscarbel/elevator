@@ -21,6 +21,13 @@ function App() {
     setElevatorYAxisPos(location);
   };
 
+  //identify what floor the y-axis position corresponds to
+  const detectFloor = (yPos: number = elevatorYAxisPos) => yPos / 50 + 1;
+
+  //Since each floor is 50px, we need to multiply the floor by 50 and then subtract 50 to account for the height of the elevator.
+  //grab first element in queue and find it's location on the page.
+  const convertFloorToYPos = (floor: number) => floor * 50 - 50
+
   //store arrays for displays on UI
   const floors: JSX.Element[] = [];
   const keys: JSX.Element[] = [];
@@ -30,15 +37,13 @@ function App() {
     floors.push(<Floor key={i} floor={i} />)
     keys.unshift(<Key key={i}
       floor={i}
-      changeFloor={ changeFloor } />)
+      yAxisPos={ convertFloorToYPos(i) }
+      changeFloor={ changeElevatorYAxisPos } />)
   }
 
   //Add functionality for visualizing the elevator move
   const moveElevator = () => setTimeout(() => {
-    //Since each floor is 50px, we need to multiply the floor by 50 and then subtract 50 to account for the height of the elevator.
-    //grab first element in queue and find it's location on the page.
-    const targetPosition: number = floorQueue[0] * 50 - 50;
-    const currentPosition: number = currentFloor * 50 - 50;
+
 
   },25)
 
@@ -46,9 +51,9 @@ function App() {
   return (
     <div className="App">
       <div className='building'>
-        <p>Current floor: {currentFloor}</p>
+        <p>Current floor: {detectFloor()}</p>
         {floors}
-        <Elevator currentFloor={ currentFloor }/>
+        <Elevator currentFloor={ detectFloor() } currentYPosition={ elevatorYAxisPos }/>
       </div>
       <div className='keypad'>
         {keys}
