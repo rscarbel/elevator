@@ -2,10 +2,11 @@ import React from "react"
 
 interface KeyProps {
   floor: number;
+  changeFloor: Function;
 }
 
-const Key: React.FC<KeyProps> = ({ floor }) => {
-  return <div className='key'>
+const Key: React.FC<KeyProps> = ({ floor, changeFloor }) => {
+  return <div className='key' onClick={ changeFloor(floor) }>
     <p>{ floor }</p>
   </div>;
 };
