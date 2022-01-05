@@ -6,15 +6,17 @@ import Key from './components/Key';
 
 function App() {
 
+  //keep track of the floor we're on
   let [ currentFloor, setCurrentFloor ] = useState(1);
-
   const changeFloor = (floor: number) => {
     setCurrentFloor(floor);
   };
 
+  //store arrays for displays on UI
   const floors: JSX.Element[] = [];
   const keys: JSX.Element[] = [];
 
+  //Add data for all 10 floors
   for (let i = 10; i >= 1; i--) {
     floors.push(<Floor key={i} floor={i} />)
     keys.unshift(<Key key={i}
