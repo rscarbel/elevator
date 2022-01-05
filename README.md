@@ -19,6 +19,12 @@ To get started with the development version, just run npm start.
 
 getting the final key to turn off when the elevator arrived was the biggest pain. It took way too much time
 
+I tried implementing a refresh by putting a boolean state on the app module. Whenever the elevator queue was empty, it was to refresh the key components after the three-second waiting period.
+
+The problem came in that since useState is asynchronous, toggling it was sometimes useless, because it was trying to set the state to the same boolean.
+
+I fixed it by setting the refresh state to be an object literal. Since object literals always have a new spot in memory, assigning the refresh state to a new object literaly will always count as a new state, no mater how much of an asynchronous nightmare it may become.
+
 ## Screenshots
 
 <img src="https://i.imgur.com/a9BunTL.png">
