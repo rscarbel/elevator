@@ -15,10 +15,10 @@ function App() {
     moveElevator()
   }
 
-  //keep track of the floor we're on
-  let [ currentFloor, setCurrentFloor ] = useState(1);
-  const changeFloor = (floor: number) => {
-    setCurrentFloor(floor);
+  //keep track of the position on the y-axis
+  let [ elevatorYAxisPos, setElevatorYAxisPos ] = useState(0);
+  const changeElevatorYAxisPos = (location: number) => {
+    setElevatorYAxisPos(location);
   };
 
   //store arrays for displays on UI
@@ -39,7 +39,6 @@ function App() {
     //grab first element in queue and find it's location on the page.
     const targetPosition: number = floorQueue[0] * 50 - 50;
     const currentPosition: number = currentFloor * 50 - 50;
-
 
   },25)
 
