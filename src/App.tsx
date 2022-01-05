@@ -38,6 +38,7 @@ function App() {
     keys.unshift(<Key key={i}
       floor={i}
       yAxisPos={ convertFloorToYPos(i) }
+      floorQueue={floorQueue}
       addFloorToQueue={ addFloorToQueue } />)
   }
 
