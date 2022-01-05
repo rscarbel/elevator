@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import Floor from './components/Floor';
 import Elevator from './components/Elevator';
@@ -69,6 +69,11 @@ function App() {
           moveElevator();
         } else {
           isMoving = false;
+          for (let i = NUMBER_OF_FLOORS - 1; i >= 0; i--) {
+            const floor: JSX.Element = floors[i];
+            floors[i] = floor;
+            console.log(floor)
+          }
         }
       }, WAIT_TIME)
     } else {
@@ -89,6 +94,11 @@ function App() {
             moveElevator();
           } else {
             isMoving = false;
+            for (let i = NUMBER_OF_FLOORS - 1; i >= 0; i--) {
+              const floor: JSX.Element = floors[i];
+              floors[i] = floor;
+              console.log(floor)
+            }
           }
         }, WAIT_TIME)
       }
