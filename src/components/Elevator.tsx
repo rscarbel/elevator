@@ -2,11 +2,12 @@ import React from "react";
 
 interface ElevatorProps {
   currentFloor: number;
+  currentYPosition: number;
 }
 
 
-const Elevator: React.FC<ElevatorProps> = ({ currentFloor }) => {
-  return <div className='elevator' style={ { bottom: `${currentFloor * 50 - 50}px`} }>
+const Elevator: React.FC<ElevatorProps> = ({ currentFloor, currentYPosition }) => {
+  return <div className='elevator' style={ { bottom: `${ currentYPosition }px`} }>
     <p>{ currentFloor }</p>
   </div>;
 };
