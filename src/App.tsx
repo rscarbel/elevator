@@ -10,18 +10,18 @@ function App() {
   const keys: JSX.Element[] = [];
 
   for (let i = 10; i >= 1; i--) {
-    floors.push(<Floor key={i} />)
-    keys.unshift(<Key key={i} />)
+    floors.push(<Floor key={i} floor={i} />)
+    keys.unshift(<Key key={i} floor={i} />)
   }
 
-  let [ currentFloor, setCurrentFloor ] = useState(1)
+  let [ currentFloor, setCurrentFloor ] = useState(1);
 
   return (
     <div className="App">
       <div className='building'>
         <p>Current floor: {currentFloor}</p>
         {floors}
-        <Elevator />
+        <Elevator currentFloor={ currentFloor }/>
       </div>
       <div className='keypad'>
         {keys}
