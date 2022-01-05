@@ -50,7 +50,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   user-select: none;
   background-color: #f5f5dc;
+}
+
+.key:hover {
+  cursor: pointer;
+  background-color: #e4e4bb;
+}
+
+.queued-key {
+  background-color: #ffd297;
 }
