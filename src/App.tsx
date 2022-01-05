@@ -26,6 +26,7 @@ function App() {
     if (floorQueue.indexOf(floor) === -1) {
       floorQueue.push(floor)
     }
+    //keep only one instance of moveElevator on the call stack
     if (!isMoving) {
       isMoving = true;
       moveElevator()
