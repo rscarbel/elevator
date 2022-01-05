@@ -15,6 +15,8 @@ function App() {
 
   //need to change state to rerender keys so that the last highlighted key is cleared
   let [ , setRefreshComponent ] = useState({})
+  //since useState is async, booleans are dangerous to use for refreshing, since the boolean may have changed multiple times before it is called.
+  //Setting it to an object literal will work better, because an object is always a new place in memory, meaning the state is guaranteed to change, no matter how many instances are on the callstack
   const refresh = () => {
     setRefreshComponent({})
   }

@@ -2,8 +2,14 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('Current floor display is on page', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const currentFloorDisplay = screen.getByText(/current floor/i);
+  expect(currentFloorDisplay).toBeInTheDocument();
+});
+
+test('Current floor display is on page', () => {
+  render(<App />);
+  const currentFloorDisplay = screen.getByText(/current floor/i);
+  expect(currentFloorDisplay).toBeInTheDocument();
 });
