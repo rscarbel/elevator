@@ -13,6 +13,9 @@ const WAIT_TIME: number = 1500;
 
 function App() {
 
+  //need to change state to rerender keys so that the last highlighted key is cleared
+  const [ refreshComponent, setRefreshComponent ] = useState(true)
+
   //add floors to queue and initiate elevator movement
   const addFloorToQueue = (floor: number) => {
     if (floorQueue.indexOf(floor) === -1) {
@@ -69,11 +72,7 @@ function App() {
           moveElevator();
         } else {
           isMoving = false;
-          for (let i = NUMBER_OF_FLOORS - 1; i >= 0; i--) {
-            const floor: JSX.Element = floors[i];
-            floors[i] = floor;
-            console.log(floor)
-          }
+          setRefreshComponent(!refreshComponent);
         }
       }, WAIT_TIME)
     } else {
@@ -95,9 +94,9 @@ function App() {
           } else {
             isMoving = false;
             for (let i = NUMBER_OF_FLOORS - 1; i >= 0; i--) {
-              const floor: JSX.Element = floors[i];
-              floors[i] = floor;
-              console.log(floor)
+              const key: JSX.Element = keys[i];
+              keys[i] = key;
+              console.log(key)
             }
           }
         }, WAIT_TIME)
