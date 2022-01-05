@@ -38,12 +38,21 @@ function App() {
     keys.unshift(<Key key={i}
       floor={i}
       yAxisPos={ convertFloorToYPos(i) }
-      changeFloor={ changeElevatorYAxisPos } />)
+      addFloorToQueue={ addFloorToQueue } />)
   }
 
   //Add functionality for visualizing the elevator move
   const moveElevator = () => setTimeout(() => {
+    const targetLocation: number =  convertFloorToYPos(floorQueue[0]);
+    const currentLocation: number = detectFloor()
 
+    if (currentLocation > targetLocation) {
+      setElevatorYAxisPos(elevatorYAxisPos -= 5);
+      moveElevator();
+    } else if (currentLocation < targetLocation) {
+      setElevatorYAxisPos(elevatorYAxisPos += 5);
+      moveElevator();
+    }
 
   },25)
 
@@ -67,18 +76,12 @@ export default App;
 /*
 TODO
 
-create building with 10 floors
-    display floor number on each floor
-create elevator
 create keypad with 10 keys
     keys need to light up when pressed
     keys need to remain lighted up when elevator has not reached them
 
 make elevator move
-    it needs to go to the floor of the button that was pressed
-    it needs to have a priority queue
     it needs to stop at floors inbetween the current floor and the target floor
     it needs to wait 3 seconds at stopped floors
-display current floor
-    it should update as the floor moves
+
 */
