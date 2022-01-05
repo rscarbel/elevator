@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Floor from './components/Floor';
 import Elevator from './components/Elevator';
@@ -14,9 +14,12 @@ function App() {
     keys.unshift(<Key key={i} />)
   }
 
+  let [ currentFloor, setCurrentFloor ] = useState(1)
+
   return (
     <div className="App">
       <div className='building'>
+        <p>Current floor: {currentFloor}</p>
         {floors}
         <Elevator />
       </div>
