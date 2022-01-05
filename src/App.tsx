@@ -7,7 +7,7 @@ import Key from './components/Key';
 //create queue for pressed floors that persists though renders
 const floorQueue: number[] = [];
 let isMoving: boolean = false;
-const NUMBER_OF_FLOORS: number = 15;
+const NUMBER_OF_FLOORS: number = 10;
 //how long the elevator will pause on each floor in ms
 const WAIT_TIME: number = 1500;
 
