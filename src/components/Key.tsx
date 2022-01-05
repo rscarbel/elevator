@@ -6,7 +6,7 @@ interface KeyProps {
 }
 
 const Key: React.FC<KeyProps> = ({ floor, changeFloor }) => {
-  return <div className='key' onClick={ changeFloor(floor) }>
+  return <div className='key' onClick={ function(){changeFloor(floor)} }>
     <p>{ floor }</p>
   </div>;
 };
