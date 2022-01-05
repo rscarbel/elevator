@@ -7,11 +7,28 @@ interface KeyProps {
   refresh: Function;
 }
 
-const Key: React.FC<KeyProps> = ({ floor, addFloorToQueue, floorQueue, refresh }) => {
+const Key: React.FC<KeyProps> = ({
+  floor,
+  addFloorToQueue,
+  floorQueue,
+  refresh
+}) => {
 
+  //if this floor is in the queue, we will need to "light up" the button
   const isInQueue: boolean = floorQueue.indexOf(floor) === -1 ? false : true;
 
-  return <div className={`key ${isInQueue ? 'queued-key' : ''}`} onClick={ function(){addFloorToQueue(floor);refresh()} }>
+  return <div
+  //add the class for makint it a lit button if it is in the queue
+    className={`key ${ isInQueue
+      ? 'queued-key'
+      : ''}`
+    }
+
+    onClick={ function(){
+      addFloorToQueue(floor);
+      refresh();
+      }
+  }>
     <p>{ floor }</p>
   </div>;
 };
