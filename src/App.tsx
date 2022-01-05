@@ -52,6 +52,8 @@ function App() {
     } else if (currentLocation < targetLocation) {
       setElevatorYAxisPos(elevatorYAxisPos += 5);
       moveElevator();
+    } else {
+      floorQueue.shift();
     }
 
   },25)
