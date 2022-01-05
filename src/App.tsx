@@ -4,7 +4,16 @@ import Floor from './components/Floor';
 import Elevator from './components/Elevator';
 import Key from './components/Key';
 
+//create queue for pressed floors that persists though renders
+const floorQueue: number[] = [];
+
 function App() {
+
+  //add floors to queue and initiate elevator movement
+  const addFloorToQueue = (floor: number) => {
+    floorQueue.push(floor)
+    moveElevator()
+  }
 
   //keep track of the floor we're on
   let [ currentFloor, setCurrentFloor ] = useState(1);
@@ -23,6 +32,16 @@ function App() {
       floor={i}
       changeFloor={ changeFloor } />)
   }
+
+  //Add functionality for visualizing the elevator move
+  const moveElevator = () => setTimeout(() => {
+    //Since each floor is 50px, we need to multiply the floor by 50 and then subtract 50 to account for the height of the elevator.
+    //grab first element in queue and find it's location on the page.
+    const targetPosition: number = floorQueue[0] * 50 - 50;
+    const currentPosition: number = currentFloor * 50 - 50;
+
+
+  },25)
 
 
   return (
