@@ -75,8 +75,13 @@ function App() {
         if (floorQueue.length) {
           moveElevator();
         } else {
-          isMoving = false;
-          refresh();
+          if (exactFloorPosition !== -1) {
+            floorQueue.push(1);
+            moveElevator();
+          } else {
+            isMoving = false;
+            refresh();
+          }
         }
       }, WAIT_TIME)
     } else {
