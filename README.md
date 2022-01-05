@@ -1,18 +1,28 @@
 # Elevator
 
 We're going up!
+
 This project is a simple representation of an elevator.
+
 On the UI, there will be a building, an elevator, and a keypad.
+
 It will operate exactly as a normal elevator does.
+
+
+## Getting started
+
+The project is [deployed here](https://ryans-elevator.netlify.app/).
+
+To get started with the development version, just run npm start.
+
+## difficulties
+
+getting the final key to turn off when the elevator arrived was the biggest pain. It took way too much time
 
 ## Screenshots
 
 none yet!  :(
 
-## Getting started
-
-The project is [deployed here](https://ryans-elevator.netlify.app/).
-To get started with the development version, just run npm start.
 
 ## Project requirements
 
