@@ -1,8 +1,12 @@
 import React from "react";
 
-const Elevator: React.FC = () => {
-  return <div className='elevator'>
+interface ElevatorProps {
+  currentFloor: number;
+}
 
+const Elevator: React.FC<ElevatorProps> = ({ currentFloor }) => {
+  return <div className='elevator'>
+    <p>{ currentFloor }</p>
   </div>;
 };
 
