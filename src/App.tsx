@@ -7,6 +7,9 @@ import Key from './components/Key';
 //create queue for pressed floors that persists though renders
 const floorQueue: number[] = [];
 let isMoving: boolean = false;
+const NUMBER_OF_FLOORS: number = 15;
+//how long the elevator will pause on each floor in ms
+const WAIT_TIME: number = 1500;
 
 function App() {
 
@@ -35,8 +38,8 @@ function App() {
   const floors: JSX.Element[] = [];
   const keys: JSX.Element[] = [];
 
-  //Add data for all 10 floors
-  for (let i = 10; i >= 1; i--) {
+  //Add data for all NUMBER_OF_FLOORS floors
+  for (let i = NUMBER_OF_FLOORS; i >= 1; i--) {
     floors.push(<Floor key={i} floor={i} />)
     keys.unshift(<Key key={i}
       floor={i}
@@ -45,6 +48,7 @@ function App() {
   }
 
   //Add functionality for visualizing the elevator move
+  //This is done recursively so that we can check for new floors as the elevator is moving
   const moveElevator = () => setTimeout(() => {
 
     const targetLocation: number =  convertFloorToYPos(floorQueue[0]);
@@ -58,33 +62,37 @@ function App() {
     //if the current y-axis location is the same as one of the floors in the queue, pause on that floor
     if (currentFloorQueueIndex !== -1) {
       setTimeout(() => {
+        //remove the floor we're stopped at from the queue
         floorQueue.splice(currentFloorQueueIndex,1)
+        //if there's more floors, move to them, otherwise set the move status to false
         if (floorQueue.length) {
           moveElevator();
         } else {
           isMoving = false;
         }
-      }, 1500)
+      }, WAIT_TIME)
     } else {
+      //decrement the location if the target is below the current location
       if (currentLocation > targetLocation) {
         setElevatorYAxisPos(elevatorYAxisPos -= 5);
         moveElevator();
+        //increment the location if the target is below the current location
       } else if (currentLocation < targetLocation) {
         setElevatorYAxisPos(elevatorYAxisPos += 5);
         moveElevator();
       } else {
+        //if we've reached the floor we're looking for, remove it from the queue
         floorQueue.shift();
+        //pause again, and check for more floors in the queue to see if we need to move in the other direction
         setTimeout(() => {
           if (floorQueue.length) {
             moveElevator();
           } else {
             isMoving = false;
           }
-        }, 1500)
+        }, WAIT_TIME)
       }
     }
-
-
   },25)
 
 
@@ -107,12 +115,7 @@ export default App;
 /*
 TODO
 
-create keypad with 10 keys
-    keys need to light up when pressed
-    keys need to remain lighted up when elevator has not reached them
-
 make elevator move
-    it needs to stop at floors inbetween the current floor and the target floor
     it needs to wait 3 seconds at stopped floors
 
 */
