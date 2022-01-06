@@ -130,7 +130,7 @@ function App() {
         currentYPosition={ elevatorYAxisPos }
         height={floorHeight}/>
         {floors}
-        {window.scroll(0,window.innerHeight - elevatorYAxisPos + floorHeight)}
+        {document.querySelector('.elevator')?.scrollIntoView({block: 'center', inline: 'center'})}
       </div>
     </div>
   );
