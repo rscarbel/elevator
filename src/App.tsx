@@ -129,7 +129,7 @@ function App() {
         currentYPosition={ elevatorYAxisPos }
         height={floorHeight}/>
         {floors}
-        {window.scroll(0,window.innerHeight - elevatorYAxisPos)}
+        {window.scroll(0,window.innerHeight - elevatorYAxisPos + floorHeight)}
       </div>
     </div>
   );
