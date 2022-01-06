@@ -38,17 +38,12 @@
 }
 
 .elevator {
-  width: 40px;
-  height: var(--floor-height);
-  border: var(--floor-border)px solid #000000;
   background-color: #268d37;
   position: absolute;
-  bottom: 0;
   left: 25%;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
 }
 
 .key {
