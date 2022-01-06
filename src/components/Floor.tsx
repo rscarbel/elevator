@@ -8,11 +8,10 @@ interface FloorProps {
 }
 
 const Floor: React.FC<FloorProps> = ({ floor, height }) => {
-  const borderWidthValue = styleSizes.parseStyleValue(styleSizes.borderWidth);
 
   return <div className='floor' style={
-    {height: `${height - borderWidthValue}px`,
-    borderBottomWidth: floor === 1 ? borderWidthValue : 0}
+    {height: `${height - styleSizes.borderWidthValue}px`,
+      borderBottomWidth: floor === 1 ? styleSizes.borderWidthValue : 0}
     }>
     <p>{ floor }</p>
   </div>;
