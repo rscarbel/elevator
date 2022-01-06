@@ -118,7 +118,8 @@ function App() {
         <ChangeHeightInterface
         incrementHeight={incrementHeight}
         decrementHeight={decrementHeight}
-        height={floorHeight} />
+        height={floorHeight}
+        isActive={!isMoving} />
         <p>Current floor: {detectFloor()}</p>
       <div className='keypad'>
         {keys}
