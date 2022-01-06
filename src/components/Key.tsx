@@ -17,7 +17,7 @@ const Key: React.FC<KeyProps> = ({
   //if this floor is in the queue, we will need to "light up" the button
   const isInQueue: boolean = floorQueue.indexOf(floor) === -1 ? false : true;
 
-  return <div
+  return <button
   //add the class for makint it a lit button if it is in the queue
     className={`key ${ isInQueue
       ? 'queued-key'
@@ -30,7 +30,7 @@ const Key: React.FC<KeyProps> = ({
       }
   }>
     <p>{ floor }</p>
-  </div>;
+  </button>;
 };
 
 export default Key;
