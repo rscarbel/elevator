@@ -6,6 +6,7 @@ const floorHeight = grabCSSVariable('--floor-height');
 
 const floorPadding = grabCSSVariable('--floor-padding');
 
+const parseStyleValue = (style: string) => parseInt(style.slice(0, style.length - 1))
 
 /**
  * @description Object for handeling css vars
@@ -14,14 +15,9 @@ const styleSizes = {
   borderWidth,
   floorHeight,
   floorPadding,
-
-  /**
-  * @description get the pixel value as an integer
-  */
-  parseStyleValue (style: string) {
-    return parseInt(style.slice(0, style.length - 1))
-  },
-
+  borderWidthValue: parseStyleValue(borderWidth),
+  floorHeightValue: parseStyleValue(floorHeight),
+  floorPaddingValue: parseStyleValue(floorPadding),
   /**
   * @description set the css variable pixel amount
   */
