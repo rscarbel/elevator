@@ -9,10 +9,14 @@ interface ElevatorProps {
 
 const Elevator: React.FC<ElevatorProps> = ({ currentFloor, currentYPosition, height }) => {
 
+  //anything larger than this will spill off the side of the building
+  const maxElevatorSize: number = window.innerWidth * .6
+  const width: number = height * .8;
+
   return <div className='elevator' style={ {
       bottom: `${ currentYPosition }px`,
       height: `${ height + styleSizes.borderWidthValue }px`,
-      width: height * .8} }>
+      width: width < maxElevatorSize ? width : maxElevatorSize} }>
     <p>{ currentFloor }</p>
   </div>;
 };
