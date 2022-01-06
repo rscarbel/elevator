@@ -1,4 +1,3 @@
-import { floor } from "cypress/types/lodash";
 import React from "react";
 
 interface ChangeHeightProps {
