@@ -111,19 +111,21 @@ function App() {
 
   return (
     <div className="App">
-      <ChangeHeightInterface
-      incrementHeight={incrementHeight}
-      decrementHeight={decrementHeight}
-      height={floorHeight} />
-      <div className='building'>
+      <div className='top-menu'>
+        <ChangeHeightInterface
+        incrementHeight={incrementHeight}
+        decrementHeight={decrementHeight}
+        height={floorHeight} />
         <p>Current floor: {detectFloor()}</p>
-        {floors}
+      <div className='keypad'>
+        {keys}
+      </div>
+      </div>
+      <div className='building'>
         <Elevator currentFloor={ detectFloor() }
         currentYPosition={ elevatorYAxisPos }
         height={floorHeight}/>
-      </div>
-      <div className='keypad'>
-        {keys}
+        {floors}
       </div>
     </div>
   );
