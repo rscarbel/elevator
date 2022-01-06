@@ -1,4 +1,5 @@
 import React from "react";
+import styleSizes from "../scripts/styleSizes";
 
 interface ElevatorProps {
   currentFloor: number;
@@ -6,10 +7,12 @@ interface ElevatorProps {
   height: number;
 }
 
-
 const Elevator: React.FC<ElevatorProps> = ({ currentFloor, currentYPosition, height }) => {
-  return <div className='elevator' style={ { bottom: `${ currentYPosition }px`,
-  height: `${ height - 2 }px`} }>
+
+  return <div className='elevator' style={ {
+      bottom: `${ currentYPosition }px`,
+      height: `${ height }px`,
+      width: height * .8} }>
     <p>{ currentFloor }</p>
   </div>;
 };
