@@ -1,3 +1,9 @@
+:root {
+  --floor-height: 50px;
+  --floor-border: 1px;
+  --floor-padding: 0px;
+}
+
 .App {
   display: flex;
   flex-direction: column;
@@ -11,29 +17,39 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  height: 80vh;
+  overflow-y: scroll;
 }
 
 .keypad {
   display: flex;
   justify-content: center;
   width: 100%;
+  flex-wrap: wrap;
+  height: 20vh;
+  overflow-y: scroll;
 }
 
 .floor {
   width: 70%;
-  height: 48px;
-  border: 1px solid #000000;
+  height: var(--floor-height);
+  border-style: solid;
+  border-color: #000000;
+  border-width: var(--floor-border);
   background-color: #eeeeee;
-  padding-left: 10px;
+  padding: var(--floor-padding) 10px;
   display: flex;
   align-items: center;
 }
 
 .elevator {
   width: 40px;
-  height: 48px;
-  border: 1px solid #000000;
+  height: var(--floor-height);
+  border-style: solid;
+  border-color: #000000;
+  border-width: var(--floor-border);
   background-color: #268d37;
+  padding: var(--floor-padding) 0;
   position: absolute;
   bottom: 0;
   left: 25%;
