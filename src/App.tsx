@@ -3,6 +3,7 @@ import './App.css';
 import Floor from './components/Floor';
 import Elevator from './components/Elevator';
 import Key from './components/Key';
+import ChangeHeightInterface from './components/ChangeHeightInterface';
 
 //create queue for pressed floors that persists though renders
 const floorQueue: number[] = [];
@@ -12,6 +13,14 @@ const NUMBER_OF_FLOORS: number = 10;
 const WAIT_TIME: number = 3000;
 
 function App() {
+
+  let [ floorHeight, setFloorHeight ] = useState(50);
+  const incrementHeight = () => {
+    setFloorHeight(floorHeight += 5);
+  };
+  const decrementHeight = () => {
+    setFloorHeight(floorHeight -= 5);
+  };
 
   //need to change state to rerender keys so that the last highlighted key is cleared
   let [ , setRefreshComponent ] = useState({})
@@ -38,10 +47,10 @@ function App() {
   let [ elevatorYAxisPos, setElevatorYAxisPos ] = useState(0);
 
   //identify what floor the y-axis position corresponds to
-  const detectFloor = (yPos: number = elevatorYAxisPos) => Math.floor(yPos / 50 + 1);
+  const detectFloor = (yPos: number = elevatorYAxisPos) => Math.floor(yPos / floorHeight + 1);
 
-  //Since each floor is 50px, we need to multiply the floor by 50 and then subtract 50 to account for the height of the elevator.
-  const convertFloorToYPos = (floor: number) => floor * 50 - 50
+  //Since each floor is floorHeightpx, we need to multiply the floor by floorHeight and then subtract floorHeight to account for the height of the elevator.
+  const convertFloorToYPos = (floor: number) => floor * (floorHeight + 2) - floorHeight
 
   //store arrays for displays on UI
   const floors: JSX.Element[] = [];
@@ -49,7 +58,7 @@ function App() {
 
   //Add data for all NUMBER_OF_FLOORS floors
   for (let i = NUMBER_OF_FLOORS; i >= 1; i--) {
-    floors.push(<Floor key={i} floor={i} />)
+    floors.push(<Floor key={i} floor={i} height={floorHeight} />)
     keys.unshift(<Key key={i}
       floor={i}
       floorQueue={floorQueue}
@@ -65,7 +74,7 @@ function App() {
 
     const currentLocation: number = elevatorYAxisPos;
 
-    const exactFloorPosition = currentLocation / 50 + 1;
+    const exactFloorPosition = currentLocation / (floorHeight) + 1;
 
     const currentFloorQueueIndex  = floorQueue.indexOf(exactFloorPosition)
 
@@ -90,11 +99,11 @@ function App() {
     } else {
       //decrement the location if the target is below the current location
       if (currentLocation > targetLocation) {
-        setElevatorYAxisPos(elevatorYAxisPos -= 5);
+        setElevatorYAxisPos(elevatorYAxisPos -= floorHeight / 10);
         moveElevator();
         //increment the location if the target is below the current location
       } else if (currentLocation < targetLocation) {
-        setElevatorYAxisPos(elevatorYAxisPos += 5);
+        setElevatorYAxisPos(elevatorYAxisPos += floorHeight / 10);
         moveElevator();
       }
     }
@@ -102,10 +111,16 @@ function App() {
 
   return (
     <div className="App">
+      <ChangeHeightInterface
+      incrementHeight={incrementHeight}
+      decrementHeight={decrementHeight}
+      height={floorHeight} />
       <div className='building'>
         <p>Current floor: {detectFloor()}</p>
         {floors}
-        <Elevator currentFloor={ detectFloor() } currentYPosition={ elevatorYAxisPos }/>
+        <Elevator currentFloor={ detectFloor() }
+        currentYPosition={ elevatorYAxisPos }
+        height={floorHeight}/>
       </div>
       <div className='keypad'>
         {keys}
