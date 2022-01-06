@@ -25,6 +25,8 @@
   border: 1px solid #000000;
   background-color: #eeeeee;
   padding-left: 10px;
+  display: flex;
+  align-items: center;
 }
 
 .elevator {
@@ -61,4 +63,14 @@
 
 .queued-key {
   background-color: #df912d;
+}
+
+.change-height {
+  margin: auto;
+  display: flex;
+  align-items: center;
+}
+
+.change-height > p, button {
+  margin: 5px
 }
