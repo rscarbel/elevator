@@ -53,7 +53,7 @@ function App() {
   const detectFloor = (yPos: number = elevatorYAxisPos) => Math.floor(yPos / floorHeight + 1);
 
   //Since each floor is floorHeightpx, we need to multiply the floor by floorHeight and then subtract floorHeight to account for the height of the elevator.
-  const convertFloorToYPos = (floor: number) => floor * (floorHeight + 2) - floorHeight
+  const convertFloorToYPos = (floor: number) => floor * (floorHeight + styleSizes.borderWidthValue) - floorHeight
 
   //store arrays for displays on UI
   const floors: JSX.Element[] = [];
