@@ -25,6 +25,7 @@ function App() {
     setFloorHeight(floorHeight -= 5);
   };
 
+  const completeFloorSize: number = floorHeight + (styleSizes.floorPaddingValue * 2);
   //need to change state to rerender keys so that the last highlighted key is cleared
   let [ , setRefreshComponent ] = useState({})
   //since useState is async, booleans are dangerous to use for refreshing, since the boolean may have changed multiple times before it is called.
@@ -50,10 +51,10 @@ function App() {
   let [ elevatorYAxisPos, setElevatorYAxisPos ] = useState(0);
 
   //identify what floor the y-axis position corresponds to
-  const detectFloor = (yPos: number = elevatorYAxisPos) => Math.floor(yPos / floorHeight + 1);
+  const detectFloor = (yPos: number = elevatorYAxisPos) => Math.floor(yPos / completeFloorSize + 1);
 
   //Since each floor is floorHeightpx, we need to multiply the floor by floorHeight and then subtract floorHeight to account for the height of the elevator.
-  const convertFloorToYPos = (floor: number) => floor * (floorHeight + styleSizes.borderWidthValue) - floorHeight
+  const convertFloorToYPos = (floor: number) => floor * (completeFloorSize) - floorHeight - (styleSizes.floorPaddingValue * 2) - styleSizes.borderWidthValue;
 
   //store arrays for displays on UI
   const floors: JSX.Element[] = [];
@@ -77,7 +78,7 @@ function App() {
 
     const currentLocation: number = elevatorYAxisPos;
 
-    const exactFloorPosition = currentLocation / (floorHeight) + 1;
+    const exactFloorPosition = currentLocation / (completeFloorSize) + 1;
 
     const currentFloorQueueIndex  = floorQueue.indexOf(exactFloorPosition)
 
@@ -102,11 +103,11 @@ function App() {
     } else {
       //decrement the location if the target is below the current location
       if (currentLocation > targetLocation) {
-        setElevatorYAxisPos(elevatorYAxisPos -= floorHeight / 10);
+        setElevatorYAxisPos(elevatorYAxisPos -= completeFloorSize / 10);
         moveElevator();
         //increment the location if the target is below the current location
       } else if (currentLocation < targetLocation) {
-        setElevatorYAxisPos(elevatorYAxisPos += floorHeight / 10);
+        setElevatorYAxisPos(elevatorYAxisPos += completeFloorSize / 10);
         moveElevator();
       }
     }
@@ -130,6 +131,7 @@ function App() {
         currentYPosition={ elevatorYAxisPos }
         height={floorHeight}/>
         {floors}
+        {console.log(completeFloorSize)}
         {document.querySelector('.elevator')?.scrollIntoView({block: 'center', inline: 'center'})}
       </div>
     </div>
