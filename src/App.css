@@ -46,6 +46,7 @@
   border: var(--floor-border) solid #000000;
   border-bottom-width: 0;
   background-color: #eeeeee;
+  padding: var(--floor-padding);
   padding-left: 10px;
   display: flex;
   align-items: center;
