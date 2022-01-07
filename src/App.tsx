@@ -15,15 +15,17 @@ const WAIT_TIME: number = 3000;
 
 function App() {
 
-
+  let [ floorHeight, setFloorHeight ] = useState(styleSizes.floorHeightValue);
   const incrementHeight = () => {
-    styleSizes.setStyle('--floor-height', styleSizes.floorHeightValue + 5 );
+    styleSizes.setStyle('--floor-height', floorHeight + 5 );
+    setFloorHeight(floorHeight += 5);
   };
   const decrementHeight = () => {
-    styleSizes.setStyle('--floor-height', styleSizes.floorHeightValue - 5);
+    styleSizes.setStyle('--floor-height', floorHeight - 5);
+    setFloorHeight(floorHeight -= 5);
   };
 
-  const completeFloorSize: number = styleSizes.floorHeightValue + styleSizes.borderWidthValue + (styleSizes.floorPaddingValue * 2);
+  const completeFloorSize: number = floorHeight + styleSizes.borderWidthValue + (styleSizes.floorPaddingValue * 2);
   //need to change state to rerender keys so that the last highlighted key is cleared
   let [ , setRefreshComponent ] = useState({})
   //since useState is async, booleans are dangerous to use for refreshing, since the boolean may have changed multiple times before it is called.
@@ -52,7 +54,7 @@ function App() {
   const detectFloor = (yPos: number = elevatorYAxisPos) => Math.floor(yPos / completeFloorSize + 1);
 
   //Since each floor is floorHeightpx, we need to multiply the floor by floorHeight and then subtract floorHeight to account for the height of the elevator.
-  const convertFloorToYPos = (floor: number) => floor * (completeFloorSize) - styleSizes.floorHeightValue - (styleSizes.floorPaddingValue * 2) - styleSizes.borderWidthValue;
+  const convertFloorToYPos = (floor: number) => floor * (completeFloorSize) - floorHeight - (styleSizes.floorPaddingValue * 2) - styleSizes.borderWidthValue;
 
   //store arrays for displays on UI
   const floors: JSX.Element[] = [];
@@ -117,7 +119,7 @@ function App() {
         <ChangeHeightInterface
         incrementHeight={incrementHeight}
         decrementHeight={decrementHeight}
-        height={styleSizes.floorHeightValue}
+        height={floorHeight}
         isActive={!isMoving} />
         <p>Current floor: {detectFloor()}</p>
       <div className='keypad'>
@@ -127,7 +129,7 @@ function App() {
       <div className='building'>
         <Elevator currentFloor={ detectFloor() }
         currentYPosition={ elevatorYAxisPos }
-        height={styleSizes.floorHeightValue}/>
+        height={floorHeight}/>
         {floors}
         {document.querySelector('.elevator')?.scrollIntoView({block: 'center', inline: 'center'})}
       </div>
