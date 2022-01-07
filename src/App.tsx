@@ -26,6 +26,7 @@ function App() {
   };
 
   const completeFloorSize: number = floorHeight + styleSizes.borderWidthValue + (styleSizes.floorPaddingValue * 2);
+  const movementSpeed: number = Math.floor(completeFloorSize / 8)
   //need to change state to rerender keys so that the last highlighted key is cleared
   let [ , setRefreshComponent ] = useState({})
   //since useState is async, booleans are dangerous to use for refreshing, since the boolean may have changed multiple times before it is called.
@@ -103,15 +104,27 @@ function App() {
     } else {
       //decrement the location if the target is below the current location
       if (currentLocation > targetLocation) {
-        setElevatorYAxisPos(elevatorYAxisPos -= 1);
+        //we need to check to see if we've overshot a floor, otherwise we'll end up in an endless loop
+        if (detectFloor() !== detectFloor(currentLocation - movementSpeed) &&
+       (currentLocation - movementSpeed) < targetLocation ) {
+         setElevatorYAxisPos(elevatorYAxisPos -= currentLocation - targetLocation)
+       } else {
+         setElevatorYAxisPos(elevatorYAxisPos -= movementSpeed);
+       }
         moveElevator();
         //increment the location if the target is below the current location
       } else if (currentLocation < targetLocation) {
-        setElevatorYAxisPos(elevatorYAxisPos += 1);
+        //check if overshot a floor
+        if (detectFloor() !== detectFloor(currentLocation + movementSpeed) &&
+       (currentLocation + movementSpeed) > targetLocation ) {
+         setElevatorYAxisPos(elevatorYAxisPos += targetLocation - currentLocation)
+       } else {
+         setElevatorYAxisPos(elevatorYAxisPos += movementSpeed);
+       }
         moveElevator();
       }
     }
-  },5)
+  },25)
 
   return (
     <div className="App">
