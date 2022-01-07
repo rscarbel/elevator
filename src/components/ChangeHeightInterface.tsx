@@ -34,7 +34,7 @@ const ChangeHeightInterface: React.FC<ChangeHeightProps> = ({ incrementHeight, d
     }}>+</button>
 
     <button
-    style={isActive && !(height <= 5) ? decrementStyle : deactivatedStyle}
+    style={isActive && (height > 15) ? decrementStyle : deactivatedStyle}
     onClick={function(){
       if (height > 5) {
         decrementHeight()
