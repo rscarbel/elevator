@@ -6,7 +6,7 @@ import { moveElevatorDown, moveElevatorUp } from './scripts/moveElevator';
 import Building from './components/Building';
 import Keypad from './components/Keypad';
 
-//this needs to scoped to the module because
+//this needs to scoped to the module because setting it needs to be synchronous
 let isMoving = false;
 
 function App() {
