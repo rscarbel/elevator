@@ -6,16 +6,16 @@ import Key from './components/Key';
 import ChangeHeightInterface from './components/ChangeHeightInterface';
 import styleSizes from './scripts/styleSizes';
 
-//create queue for pressed floors that persists though renders
-const floorQueue: number[] = [];
-let isMoving: boolean = false;
-const NUMBER_OF_FLOORS: number = 10;
-//how long the elevator will pause on each floor in ms
-const WAIT_TIME: number = 3000;
-
 function App() {
 
+  const [floorQueue] = useState<number[]>([]);
+  let [isMoving] = useState(false);
+  const [NUMBER_OF_FLOORS] = useState(10)
+  //how long the elevator will pause on each floor in ms
+  const [WAIT_TIME] = useState(1000)
+
   let [ floorHeight, setFloorHeight ] = useState(styleSizes.floorHeightValue);
+
   const incrementHeight = () => {
     styleSizes.setStyle('--floor-height', floorHeight + 5 );
     setFloorHeight(floorHeight += 5);
@@ -25,8 +25,7 @@ function App() {
     setFloorHeight(floorHeight -= 5);
   };
 
-  const completeFloorSize: number = floorHeight + styleSizes.borderWidthValue + (styleSizes.floorPaddingValue * 2);
-  const movementSpeed: number = Math.floor(completeFloorSize / 8)
+  const movementSpeed: number = Math.floor(floorHeight / 8)
   //need to change state to rerender keys so that the last highlighted key is cleared
   let [ , setRefreshComponent ] = useState({})
   //since useState is async, booleans are dangerous to use for refreshing, since the boolean may have changed multiple times before it is called.
@@ -52,10 +51,10 @@ function App() {
   let [ elevatorYAxisPos, setElevatorYAxisPos ] = useState(0);
 
   //identify what floor the y-axis position corresponds to
-  const detectFloor = (yPos: number = elevatorYAxisPos) => Math.floor(yPos / completeFloorSize + 1);
+  const detectFloor = (yPos: number = elevatorYAxisPos) => Math.floor(yPos / floorHeight + 1);
 
   //Since each floor is floorHeightpx, we need to multiply the floor by floorHeight and then subtract floorHeight to account for the height of the elevator.
-  const convertFloorToYPos = (floor: number) => floor * (completeFloorSize) - floorHeight - (styleSizes.floorPaddingValue * 2) - styleSizes.borderWidthValue;
+  const convertFloorToYPos = (floor: number) => floor * (floorHeight) - floorHeight;
 
   //store arrays for displays on UI
   const floors: JSX.Element[] = [];
@@ -79,7 +78,7 @@ function App() {
 
     const currentLocation: number = elevatorYAxisPos;
 
-    const exactFloorPosition = currentLocation / (completeFloorSize) + 1;
+    const exactFloorPosition = currentLocation / (floorHeight) + 1;
 
     const currentFloorQueueIndex  = floorQueue.indexOf(exactFloorPosition)
 
