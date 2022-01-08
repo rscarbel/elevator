@@ -4,6 +4,12 @@
   --floor-padding: 0px;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 .App {
   display: flex;
   flex-direction: column;
@@ -54,6 +60,8 @@
 
 .elevator {
   background-color: #268d37;
+  height: var(--floor-height);
+  width: calc(var(--floor-height) * 0.8);
   position: absolute;
   left: 25%;
   display: flex;
