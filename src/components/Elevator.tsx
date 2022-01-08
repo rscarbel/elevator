@@ -1,10 +1,8 @@
 import React from "react";
-import styleSizes from "../scripts/styleSizes";
 
 interface ElevatorProps {
   currentFloor: number;
   currentYPosition: number;
-  height: number;
 }
 
 const Elevator: React.FC<ElevatorProps> = ({ currentFloor, currentYPosition }) => {
