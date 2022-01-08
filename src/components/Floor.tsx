@@ -1,5 +1,5 @@
 import React from "react"
-import styleSizes from "../scripts/styleSizes";
+import { borderWidthValue } from "../scripts/utils";
 
 
 interface FloorProps {
@@ -10,7 +10,7 @@ const Floor: React.FC<FloorProps> = ({ floor }) => {
 
   return <div className='floor' style={
     {
-      borderBottomWidth: floor === 1 ? styleSizes.borderWidthValue : 0}
+      borderBottomWidth: floor === 1 ? borderWidthValue : 0}
     }>
     <p>{ floor }</p>
   </div>;
