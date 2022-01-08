@@ -140,8 +140,7 @@ function App() {
       </div>
       <div className='building'>
         <Elevator currentFloor={ detectFloor() }
-        currentYPosition={ elevatorYAxisPos }
-        height={floorHeight}/>
+        currentYPosition={ elevatorYAxisPos }/>
         {floors}
         {document.querySelector('.elevator')?.scrollIntoView({block: 'center', inline: 'center'})}
       </div>
