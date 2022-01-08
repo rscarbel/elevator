@@ -19,27 +19,18 @@ function App() {
   const [WAIT_TIME] = useState(1000)
   const FRAME_RATE = 25
 
-  let [ floorHeight, setFloorHeight ] = useState(floorHeightValue);
+  const [ floorHeight, setFloorHeight ] = useState(floorHeightValue);
+  const movementSpeed: number = Math.floor(floorHeight / 8);
 
-  const incrementHeight = () => {
-    setStyle('--floor-height', floorHeight + 5 );
-    setFloorHeight(floorHeight += 5);
-  };
-  const decrementHeight = () => {
-    setStyle('--floor-height', floorHeight - 5);
-    setFloorHeight(floorHeight -= 5);
-  };
-
-  const movementSpeed: number = Math.floor(floorHeight / 8)
   //need to change state to rerender keys so that the last highlighted key is cleared
-  let [ , setRefreshComponent ] = useState({})
+  const [ , setRefreshComponent ] = useState({})
   //a boolean fails since useState is asynchronous, using an object literal guarantees this
   const refresh = () => {
     setRefreshComponent({})
   }
 
   //add floors to queue and initiate elevator movement
-  const addFloorToQueue = async (floor: number) => {
+  const addFloorToQueue = (floor: number) => {
     if (floorQueue.indexOf(floor) === -1) {
       floorQueue.push(floor)
     }
@@ -105,8 +96,7 @@ function App() {
     <div className="App">
       <div className='top-menu'>
         <ChangeHeightInterface
-        incrementHeight={incrementHeight}
-        decrementHeight={decrementHeight}
+        setFloorHeight={setFloorHeight}
         height={floorHeight}
         isActive={!isMoving} />
 
