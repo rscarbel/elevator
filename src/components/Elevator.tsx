@@ -7,16 +7,12 @@ interface ElevatorProps {
   height: number;
 }
 
-const Elevator: React.FC<ElevatorProps> = ({ currentFloor, currentYPosition, height }) => {
+const Elevator: React.FC<ElevatorProps> = ({ currentFloor, currentYPosition }) => {
 
   //anything larger than this will spill off the side of the building
-  const maxElevatorSize: number = window.innerWidth * .6
-  const width: number = height * .8;
 
   return <div className='elevator' style={ {
-      bottom: `${ currentYPosition }px`,
-      height: `${ height + styleSizes.borderWidthValue }px`,
-      width: width < maxElevatorSize ? width : maxElevatorSize} }>
+      bottom: `${ currentYPosition }px`} }>
     <p>{ currentFloor }</p>
   </div>;
 };
