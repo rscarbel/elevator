@@ -99,8 +99,9 @@
   align-items: center;
 }
 
-.change-height > p, button {
-  margin: 5px
+.change-height > p,
+button {
+  margin: 5px;
 }
 
 .change-height > button {
