@@ -4,7 +4,8 @@ import Floor from './components/Floor';
 import Elevator from './components/Elevator';
 import Key from './components/Key';
 import ChangeHeightInterface from './components/ChangeHeightInterface';
-import styleSizes from './scripts/styleSizes';
+import { floorHeightValue, setStyle } from './scripts/utils';
+
 
 function App() {
 
@@ -14,14 +15,14 @@ function App() {
   //how long the elevator will pause on each floor in ms
   const [WAIT_TIME] = useState(1000)
 
-  let [ floorHeight, setFloorHeight ] = useState(styleSizes.floorHeightValue);
+  let [ floorHeight, setFloorHeight ] = useState(floorHeightValue);
 
   const incrementHeight = () => {
-    styleSizes.setStyle('--floor-height', floorHeight + 5 );
+    setStyle('--floor-height', floorHeight + 5 );
     setFloorHeight(floorHeight += 5);
   };
   const decrementHeight = () => {
-    styleSizes.setStyle('--floor-height', floorHeight - 5);
+    setStyle('--floor-height', floorHeight - 5);
     setFloorHeight(floorHeight -= 5);
   };
 
