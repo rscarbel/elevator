@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { floorHeightValue, setStyle } from '../scripts/utils';
+import React from 'react';
+import { setStyle } from '../scripts/utils';
 
 interface ChangeHeightProps {
   height: number;
