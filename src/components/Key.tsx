@@ -20,7 +20,7 @@ const Key: React.FC<KeyProps> = ({
   return <button
   //add the class for makint it a lit button if it is in the queue
     className={`key ${ isInQueue
-      ? 'queued-key'
+      ? 'key--queued'
       : ''}`
     }
 
