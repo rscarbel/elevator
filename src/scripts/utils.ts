@@ -11,6 +11,6 @@ export const floorPaddingValue = parseInt(floorPadding);
   /**
   * @description set the css variable pixel amount
   */
-export const setStyle = (variable: string, value: number) => {
+export const setStyle: (variable: string, value: number)=> void = (variable, value) => {
   document.documentElement.style.setProperty(variable,`${value}px`);
 }
