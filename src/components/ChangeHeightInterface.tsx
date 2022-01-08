@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
+import { floorHeightValue, setStyle } from "../scripts/utils";
 
 interface ChangeHeightProps {
-  incrementHeight: Function;
-  decrementHeight: Function;
   height: number;
   isActive: boolean;
+  setFloorHeight: Function;
 }
 
 const deactivatedStyle = {
@@ -23,7 +23,18 @@ const decrementStyle = {
   backgroundColor: '#ffd13d'
 }
 
-const ChangeHeightInterface: React.FC<ChangeHeightProps> = ({ incrementHeight, decrementHeight, height, isActive}) => {
+const ChangeHeightInterface: React.FC<ChangeHeightProps> = ({ height, isActive, setFloorHeight }) => {
+
+
+  const incrementHeight = () => {
+    setStyle('--floor-height', height + 5 );
+    setFloorHeight(height += 5);
+  };
+  const decrementHeight = () => {
+    setStyle('--floor-height', height - 5);
+    setFloorHeight(height -= 5);
+  };
+
   return <div className="change-height">
 
     <p>Change floor height:</p>
