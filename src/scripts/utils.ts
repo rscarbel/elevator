@@ -14,3 +14,5 @@ export const floorPaddingValue = parseInt(floorPadding);
 export const setStyle: (variable: string, value: number)=> void = (variable, value) => {
   document.documentElement.style.setProperty(variable,`${value}px`);
 }
+
+export const wait: (time: number) => void = (time) => new Promise (resolve => setTimeout(resolve, time));
