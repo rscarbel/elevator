@@ -8,15 +8,13 @@ import Keypad from './components/Keypad';
 
 //this needs to scoped to the module because setting it needs to be synchronous
 let isMoving = false;
+const floorQueue: number[] = [];
+const NUMBER_OF_FLOORS = 10;
+//how long the elevator will pause on each floor in ms
+const WAIT_TIME = 10000;
+const FRAME_RATE = 25;
 
 function App() {
-  const [floorQueue] = useState<number[]>([]);
-  // let [isMoving] = useState(false);
-  const [NUMBER_OF_FLOORS] = useState(10);
-  //how long the elevator will pause on each floor in ms
-  const [WAIT_TIME] = useState(1000);
-  const FRAME_RATE = 25;
-
   const [floorHeight, setFloorHeight] = useState(floorHeightValue);
   const movementSpeed: number = Math.floor(floorHeight / 8);
 
@@ -47,11 +45,11 @@ function App() {
     Math.floor(yPos / floorHeight + 1);
 
   //we need tofloorHeight to account for the height of the elevator.
-  const convertFloorToYPos = (floor: number) =>
+  const convertFloorToYVal = (floor: number) =>
     floor * floorHeight - floorHeight;
 
   const moveElevator = async () => {
-    const targetLocation: number = convertFloorToYPos(floorQueue[0]);
+    const targetLocation: number = convertFloorToYVal(floorQueue[0]);
     const currentLocation: number = elevatorYAxisPos;
     const exactFloorPosition = currentLocation / floorHeight + 1;
     const currentFloorQueueIndex = floorQueue.indexOf(exactFloorPosition);
