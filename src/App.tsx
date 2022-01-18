@@ -11,7 +11,7 @@ let isMoving = false;
 const floorQueue: number[] = [];
 const NUMBER_OF_FLOORS = 10;
 //how long the elevator will pause on each floor in ms
-const WAIT_TIME = 10000;
+const WAIT_TIME = 1000;
 const FRAME_RATE = 25;
 
 function App() {
